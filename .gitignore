@@ -3,4 +3,4 @@ venv
 *.db
 *.sqlite
 *.sqlite3
-
+*initial.py
