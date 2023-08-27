@@ -169,6 +169,14 @@ class Link3Detail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Link.objects.all()
     serializer_class = LinkSerializer
 
+    def get(self, request, pk, format=None):
+        link = self.get_object()
+        link.viewcount += 1
+        print(link.viewcount)
+        link.save()
+        serializer = LinkSerializer(link)
+        return Response(serializer.data)
+
 
 "________________________USER______________________________"
 from django.contrib.auth.models import User

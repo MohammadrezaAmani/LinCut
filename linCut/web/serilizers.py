@@ -30,11 +30,9 @@ class LinkSerializerOld(Serializer):
         Update and return an existing `Link` instance, given the validated data.
         """
         instance.link = validated_data.get("link", instance.link)
-        instance.description = validated_data.get(
-            "description", instance.description)
+        instance.description = validated_data.get("description", instance.description)
         instance.owner = validated_data.get("owner", instance.owner)
-        instance.shortedLink = validated_data.get(
-            "shortedLink", instance.shortedLink)
+        instance.shortedLink = validated_data.get("shortedLink", instance.shortedLink)
         instance.save()
         return instance
 
@@ -44,7 +42,7 @@ class LinkSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Link
-        fields = "__all__"
+        fields = ["link", "description", "owner", "shortedLink"]
 
 
 class UserSerializer(serializers.ModelSerializer):
