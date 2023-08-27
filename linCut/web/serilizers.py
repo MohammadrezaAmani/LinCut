@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework.serializers import Serializer
 from rest_framework import serializers
 from .models import Link
@@ -29,9 +30,11 @@ class LinkSerializerOld(Serializer):
         Update and return an existing `Link` instance, given the validated data.
         """
         instance.link = validated_data.get("link", instance.link)
-        instance.description = validated_data.get("description", instance.description)
+        instance.description = validated_data.get(
+            "description", instance.description)
         instance.owner = validated_data.get("owner", instance.owner)
-        instance.shortedLink = validated_data.get("shortedLink", instance.shortedLink)
+        instance.shortedLink = validated_data.get(
+            "shortedLink", instance.shortedLink)
         instance.save()
         return instance
 
@@ -42,9 +45,6 @@ class LinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Link
         fields = "__all__"
-
-
-from django.contrib.auth.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
