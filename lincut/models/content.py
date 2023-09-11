@@ -6,9 +6,12 @@ class Link(BaseModel):
     short_url: str = Field(...)
 
 
-class LinkDB(Link):
+class LinkRes(Link):
     id: int = Field(default=None)
     created_at: str = Field(...)
+    views: int
+
+
+class LinkDB(LinkRes):
     updated_at: str = Field(...)
     user_id: int
-    deleted_at: str
