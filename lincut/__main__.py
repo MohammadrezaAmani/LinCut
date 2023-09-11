@@ -1,25 +1,20 @@
-from config import Config
+from .config import Config
 from fastapi import FastAPI
 
 if __name__ == "__main__":
-    from fastapi import FastAPI, Request
-    from fastapi.responses import JSONResponse, RedirectResponse
-    from fastapi_jwt_auth.exceptions import AuthJWTException
-
     app = FastAPI()
 
     # app.include_router(user.router)
-    
 
-    @app.exception_handler(AuthJWTException)
-    def authjwt_exception_handler(request: Request, exc: AuthJWTException):
-        return JSONResponse(
-            status_code=exc.status_code, content={"detail": exc.message}
-        )
+    # @app.exception_handler(AuthJWTException)
+    # def authjwt_exception_handler(request: Request, exc: AuthJWTException):
+    #     return JSONResponse(
+    #         status_code=exc.status_code, content={"detail": exc.message}
+    #     )
 
     @app.get("/")
     async def root():
-        return RedirectResponse(url="/docs")
+        return {"message": "hello world!"}
 
     import uvicorn
 
