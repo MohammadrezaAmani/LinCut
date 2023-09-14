@@ -72,6 +72,7 @@ class View(Base):
 
 
 class Link(Base):
+    __tablename__ = "link"
     url: Mapped[str] = mapped_column(String(400))
     short_url: Mapped[str] = mapped_column(String(50), primary_key=True)
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey("user.id"))
