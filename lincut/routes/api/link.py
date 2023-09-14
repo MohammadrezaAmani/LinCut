@@ -157,3 +157,23 @@ async def delete(id: int, Auth: AuthJWT = Depends()):
     if not delete_link(id):
         raise HTTPException(status_code=400, detail="Link not found")
     return responses.RedirectResponse(url="/user/dashboard")
+
+
+@router.get("/go/{short_url}")
+async def get(short_url: str):
+    link = searchLinkByShortURL(short_url)
+    if not link:
+        raise HTTPException(status_code=400, detail="Link not found")
+    return responses.RedirectResponse(url=link.url)
+
+
+@router.get("/user/go/{short_url}")
+async def get(short_url: str, Auth: AuthJWT = Depends()):
+    Auth.jwt_required()
+    user = getUser(Auth)
+    link = searchLinkByShortURL(short_url)
+    if not link:
+        raise HTTPException(status_code=400, detail="Link not found")
+    if link.user != user.id:
+        raise HTTPException(status_code=400, detail="Link not found")
+    return responses.RedirectResponse(url=link.url)
