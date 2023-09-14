@@ -12,6 +12,15 @@ class LinkRes(Link):
     views: int
 
 
-class LinkDB(LinkRes):
-    updated_at: str = Field(...)
-    user_id: int
+class LinkDB(BaseModel):
+    id: int
+    url: str
+    short_url: str
+    user: int
+    created_at: str
+    updated_at: str
+    views: list
+    is_active: int
+    is_deleted: int
+    is_blocked: int
+    reports: int

@@ -31,8 +31,7 @@ async def signup(user: UserSignUp, Authorize: AuthJWT = Depends()):
     if searchUserByEmail(user.email):
         raise HTTPException(status_code=400, detail="Email already registered")
     if searchUserByUsername(user.username):
-        raise HTTPException(
-            status_code=400, detail="Username already registered")
+        raise HTTPException(status_code=400, detail="Username already registered")
     user = UserDB(
         first_name=user.first_name,
         last_name=user.last_name,
@@ -58,7 +57,7 @@ async def signup(user: UserSignUp, Authorize: AuthJWT = Depends()):
         is_trial=0,
         is_trial_used=0,
         is_trial_expired=0,
-        id=count_users()+1,
+        id=count_users() + 1,
     )
     user = add_user_object(user)
     if user:

@@ -57,6 +57,33 @@ class User(Base):
         )
 
 
+class View(Base):
+    user: Mapped[User] = mapped_column(Integer, ForeignKey("user.id"))
+    link = mapped_column(Integer, ForeignKey("link.id"))
+    created_at = mapped_column(DateTime(), default=datetime.now)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    ip: Mapped[str] = mapped_column(String(50), nullable=True)
+    device: Mapped[str] = mapped_column(String(50), nullable=True)
+    os: Mapped[str] = mapped_column(String(50), nullable=True)
+    browser: Mapped[str] = mapped_column(String(50), nullable=True)
+    country: Mapped[str] = mapped_column(String(50), nullable=True)
+    city: Mapped[str] = mapped_column(String(50), nullable=True)
+
+
+class Link(Base):
+    url: Mapped[str] = mapped_column(String(400))
+    short_url: Mapped[str] = mapped_column(String(50), primary_key=True)
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("user.id"))
+    created_at = mapped_column(DateTime(), default=datetime.now)
+    updated_at = mapped_column(DateTime(), default=datetime.now, onupdate=datetime.now)
+    views: Mapped[list[View]] = relationship("View", backref="link")
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    is_active: Mapped[int] = mapped_column(Integer, default=1)
+    is_deleted: Mapped[int] = mapped_column(Integer, default=0)
+    is_blocked: Mapped[int] = mapped_column(Integer, default=0)
+    reports: Mapped[int] = mapped_column(Integer, default=0)
+
+
 def create_tables(engine):
     metadata = Base.metadata
     metadata.create_all(engine)

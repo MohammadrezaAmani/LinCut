@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, responses
 from lincut import DB
-from lincut.models.content import Link, LinkDB, LinkRes
+from lincut.models.link import Link, LinkDB, LinkRes
 import datetime
 
 router = APIRouter(
