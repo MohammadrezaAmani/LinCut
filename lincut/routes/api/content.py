@@ -5,7 +5,7 @@ import datetime
 
 router = APIRouter(
     prefix="/api/content",
-    tags=["Token"],
+    tags=["Content"],
     responses={404: {"description": "Not found"}},
 )
 
