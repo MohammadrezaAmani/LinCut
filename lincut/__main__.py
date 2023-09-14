@@ -1,6 +1,6 @@
 from .config import Config
 from fastapi import FastAPI
-from .routes.api.content import router as contentRouter
+from .routes.api.link import router as contentRouter
 from .routes.api.user import router as userRouter
 from .routes.api.token import router as tokenRouter
 
