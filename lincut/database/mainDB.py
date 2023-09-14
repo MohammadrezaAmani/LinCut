@@ -58,6 +58,7 @@ class User(Base):
 
 
 class View(Base):
+    __tablename__ = "view"
     user: Mapped[User] = mapped_column(Integer, ForeignKey("user.id"))
     link = mapped_column(Integer, ForeignKey("link.id"))
     created_at = mapped_column(DateTime(), default=datetime.now)
