@@ -57,11 +57,11 @@ The config.py file allows you to configure various aspects of the Lincut service
 ### Contributing
 We welcome contributions to Lincut! If you would like to contribute, please follow these guidelines:
 
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and ensure the code is well-documented.
-4. Run tests to make sure your changes haven't broken existing functionality.
-5. Submit a pull request with a clear description of the changes and the problem they solve.
+- Fork the repository.
+- Create a new branch for your feature or bug fix.
+- Make your changes and ensure the code is well-documented.
+- Run tests to make sure your changes haven't broken existing functionality.
+- Submit a pull request with a clear description of the changes and the problem they solve.
 ### License
 Lincut is open-source software released under the `MIT` License. You are free to use, modify, and distribute it as you see fit.
 
