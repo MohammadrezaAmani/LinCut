@@ -11,6 +11,9 @@ from sqlalchemy import (
 from datetime import datetime
 
 from sqlalchemy import String
+
+# list
+# from sqlalchemy import List
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
@@ -75,10 +78,10 @@ class Link(Base):
     __tablename__ = "link"
     url: Mapped[str] = mapped_column(String(400))
     short_url: Mapped[str] = mapped_column(String(50), primary_key=True)
-    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("user.id"))
+    user: Mapped[int] = mapped_column(Integer, ForeignKey("user.id"))
     created_at = mapped_column(DateTime(), default=datetime.now)
     updated_at = mapped_column(DateTime(), default=datetime.now, onupdate=datetime.now)
-    views: Mapped[list[View]] = relationship("View", backref="link")
+    views = None
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     is_active: Mapped[int] = mapped_column(Integer, default=1)
     is_deleted: Mapped[int] = mapped_column(Integer, default=0)
@@ -87,5 +90,5 @@ class Link(Base):
 
 
 def create_tables(engine):
-    metadata = Base.metadata
-    metadata.create_all(engine)
+    # create tables for User, Link and View
+    Base.metadata.create_all(engine)

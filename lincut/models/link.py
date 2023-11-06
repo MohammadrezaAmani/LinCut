@@ -1,3 +1,4 @@
+import datetime
 from pydantic import BaseModel, EmailStr, Field
 
 
@@ -8,7 +9,7 @@ class Link(BaseModel):
 
 class LinkRes(Link):
     id: int = Field(default=None)
-    created_at: str = Field(...)
+    created_at: datetime.datetime
     views: int
 
 
@@ -17,8 +18,8 @@ class LinkDB(BaseModel):
     url: str
     short_url: str
     user: int
-    created_at: str
-    updated_at: str
+    created_at: datetime.datetime
+    updated_at: datetime.datetime
     views: list
     is_active: int
     is_deleted: int

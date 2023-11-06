@@ -26,6 +26,7 @@ router = APIRouter(
 @router.post("/create", response_model=LinkRes)
 async def create(data: Link):
     link = LinkDB(
+        id=65,
         url=data.url,
         short_url=data.short_url,
         user=0,
@@ -37,6 +38,7 @@ async def create(data: Link):
         is_blocked=0,
         reports=0,
     )
+    print(link)
     if not add_link_object(link):
         raise HTTPException(status_code=400, detail="Link already exists")
     return LinkRes(
@@ -44,7 +46,7 @@ async def create(data: Link):
         short_url=link.short_url,
         id=link.id,
         created_at=link.created_at,
-        views=link.views,
+        views=0,
     )
 
 
@@ -75,7 +77,7 @@ async def create(data: Link, Authorize: AuthJWT = Depends()):
     )
 
 
-@router.get("/list", response_model=list[LinkRes])
+@router.get("/list")
 async def list(Auth: AuthJWT = Depends()):
     Auth.jwt_required()
     user = getUser(Auth)
@@ -85,7 +87,7 @@ async def list(Auth: AuthJWT = Depends()):
         return searchlinkBylinkname(user.username)
 
 
-@router.get("/user/list", response_model=list[LinkRes])
+@router.get("/user/list")
 async def list(Auth: AuthJWT = Depends()):
     Auth.jwt_required()
     user = getUser(Auth)
